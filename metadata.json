@@ -1,0 +1,6 @@
+{
+  "name": "KURS.AZ - Kurs və Təhsil Elanları Platforması",
+  "description": "Azərbaycanın aparıcı kurs və təhsil elanları bazarı. İT, xarici dil, abituriyent, peşə və biznes kurslarını araşdırın, qiymətləri müqayisə edin və elan yerləşdirin.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
