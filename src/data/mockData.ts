@@ -1,9 +1,13 @@
 import { Course, Category, Article } from '../types';
+import heroImg from '../assets/images/hero_education_baku_1792232038435.jpg';
+import courseItImg from '../assets/images/course_it_coding_1792232038730.jpg';
+import courseLangImg from '../assets/images/course_foreign_languages_1792232039448.jpg';
+import courseBusinessImg from '../assets/images/course_business_accounting_1792232039485.jpg';
 
-export const HERO_IMAGE = '/src/assets/images/hero_education_baku_1792232038435.jpg';
-export const COURSE_IT_IMAGE = '/src/assets/images/course_it_coding_1792232038730.jpg';
-export const COURSE_LANG_IMAGE = '/src/assets/images/course_foreign_languages_1792232039448.jpg';
-export const COURSE_BUSINESS_IMAGE = '/src/assets/images/course_business_accounting_1792232039485.jpg';
+export const HERO_IMAGE = heroImg;
+export const COURSE_IT_IMAGE = courseItImg;
+export const COURSE_LANG_IMAGE = courseLangImg;
+export const COURSE_BUSINESS_IMAGE = courseBusinessImg;
 
 export const CATEGORIES: Category[] = [
   {

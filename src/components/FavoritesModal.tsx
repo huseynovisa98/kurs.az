@@ -1,6 +1,7 @@
 import React from 'react';
 import { X, Heart, Trash2, ArrowRight, MessageCircle } from 'lucide-react';
 import { Course } from '../types';
+import { getSafeImageUrl } from '../utils/imageUtils';
 
 interface FavoritesModalProps {
   isOpen: boolean;
@@ -78,9 +79,12 @@ export const FavoritesModal: React.FC<FavoritesModalProps> = ({
                     className="flex items-center gap-3 cursor-pointer flex-1 min-w-0"
                   >
                     <img
-                      src={course.image}
+                      src={getSafeImageUrl(course.image, course.category)}
                       alt={course.title}
                       className="w-14 h-14 rounded-lg object-cover shrink-0 bg-slate-100"
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).src = '/images/course_it_coding.jpg';
+                      }}
                     />
                     <div className="min-w-0">
                       <div className="text-xs text-[#667085]">{course.category}</div>

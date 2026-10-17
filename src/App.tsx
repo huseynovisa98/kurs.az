@@ -18,6 +18,7 @@ import {
   ARTICLES 
 } from './data/mockData';
 import { Course, Category, FilterState } from './types';
+import { getSafeImageUrl } from './utils/imageUtils';
 
 export default function App() {
   // Navigation State
@@ -28,7 +29,11 @@ export default function App() {
     const saved = localStorage.getItem('kursaz_courses');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed: Course[] = JSON.parse(saved);
+        return parsed.map((c) => ({
+          ...c,
+          image: getSafeImageUrl(c.image, c.categorySlug || c.category),
+        }));
       } catch (e) {
         return INITIAL_COURSES;
       }

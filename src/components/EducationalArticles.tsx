@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { BookOpen, Calendar, Clock, ArrowRight, X, User } from 'lucide-react';
 import { Article } from '../types';
+import { getSafeImageUrl } from '../utils/imageUtils';
 
 interface EducationalArticlesProps {
   articles: Article[];
@@ -38,10 +39,13 @@ export const EducationalArticles: React.FC<EducationalArticlesProps> = ({ articl
             >
               <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
                 <img
-                  src={article.image}
+                  src={getSafeImageUrl(article.image, article.category)}
                   alt={article.title}
                   className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-300"
                   loading="lazy"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/images/hero_education_baku.jpg';
+                  }}
                 />
               </div>
 
@@ -108,9 +112,12 @@ export const EducationalArticles: React.FC<EducationalArticlesProps> = ({ articl
 
               <div className="aspect-[16/9] rounded-xl overflow-hidden bg-slate-100">
                 <img
-                  src={selectedArticle.image}
+                  src={getSafeImageUrl(selectedArticle.image, selectedArticle.category)}
                   alt={selectedArticle.title}
                   className="w-full h-full object-cover"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = '/images/hero_education_baku.jpg';
+                  }}
                 />
               </div>
 

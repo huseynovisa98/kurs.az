@@ -13,6 +13,7 @@ import {
   Laptop
 } from 'lucide-react';
 import { Course } from '../types';
+import { getSafeImageUrl } from '../utils/imageUtils';
 
 interface CourseCardProps {
   course: Course;
@@ -82,7 +83,7 @@ export const CourseCard: React.FC<CourseCardProps> = ({
       <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100">
         {!imageError ? (
           <img
-            src={course.image}
+            src={getSafeImageUrl(course.image, course.category)}
             alt={course.title}
             onError={() => setImageError(true)}
             referrerPolicy="no-referrer"

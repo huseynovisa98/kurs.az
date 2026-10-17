@@ -12,6 +12,7 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onSelectCategory }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [selectedFormat, setSelectedFormat] = useState('all');
+  const [imageError, setImageError] = useState(false);
 
   const popularQueries = [
     { label: 'İngilis dili', cat: 'xarici-diller', term: 'İngilis' },
@@ -146,12 +147,23 @@ export const Hero: React.FC<HeroProps> = ({ onSearch, onSelectCategory }) => {
           {/* Right Column: Hero Visual Asset & Key Metrics Strip */}
           <div className="lg:col-span-5 relative">
             <div className="relative rounded-2xl overflow-hidden border border-[#E6EAF0] shadow-md bg-white aspect-[4/3] sm:aspect-[16/11]">
-              <img
-                src={HERO_IMAGE}
-                alt="Azərbaycan tələbələri tədris mərkəzində"
-                className="w-full h-full object-cover"
-                loading="eager"
-              />
+              {!imageError ? (
+                <img
+                  src={HERO_IMAGE}
+                  alt="Azərbaycan tələbələri tədris mərkəzində"
+                  className="w-full h-full object-cover"
+                  loading="eager"
+                  onError={() => setImageError(true)}
+                />
+              ) : (
+                <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 via-indigo-50 to-slate-100 p-8 text-center">
+                  <div className="w-16 h-16 rounded-2xl bg-[#315EFB]/10 text-[#315EFB] flex items-center justify-center mb-3">
+                    <Sparkles className="w-8 h-8" />
+                  </div>
+                  <h3 className="font-extrabold text-lg text-[#182230]">Azərbaycanın Kurs Bazarı</h3>
+                  <p className="text-xs text-[#667085] mt-1">1,450+ təsdiqlənmiş tədris elanları və kurslar</p>
+                </div>
+              )}
               <div className="absolute inset-0 bg-gradient-to-t from-[#182230]/75 via-transparent to-transparent pointer-events-none" />
 
               {/* Floating Verified Badge */}

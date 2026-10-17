@@ -17,6 +17,7 @@ import {
   UserCheck
 } from 'lucide-react';
 import { Course } from '../types';
+import { getSafeImageUrl } from '../utils/imageUtils';
 
 interface CourseDetailModalProps {
   course: Course | null;
@@ -42,6 +43,7 @@ export const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
   const [inquiryPhone, setInquiryPhone] = useState('');
   const [inquiryMessage, setInquiryMessage] = useState('');
   const [inquirySuccess, setInquirySuccess] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
@@ -170,11 +172,20 @@ export const CourseDetailModal: React.FC<CourseDetailModalProps> = ({
               
               {/* Course Image Preview */}
               <div className="rounded-2xl overflow-hidden border border-[#E6EAF0] aspect-[16/9] bg-slate-100">
-                <img
-                  src={course.image}
-                  alt={course.title}
-                  className="w-full h-full object-cover"
-                />
+                {!imageError ? (
+                  <img
+                    src={getSafeImageUrl(course.image, course.category)}
+                    alt={course.title}
+                    className="w-full h-full object-cover"
+                    onError={() => setImageError(true)}
+                  />
+                ) : (
+                  <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-slate-600 p-6 text-center">
+                    <BookOpen className="w-10 h-10 text-[#315EFB] mb-2" />
+                    <span className="font-bold text-sm text-[#182230]">{course.category}</span>
+                    <span className="text-xs text-[#667085] mt-1">{course.providerName}</span>
+                  </div>
+                )}
               </div>
 
               {/* Full Description */}

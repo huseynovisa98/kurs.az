@@ -15,7 +15,7 @@ import {
   FileText
 } from 'lucide-react';
 import { Course, Category } from '../types';
-import { BAKU_METRO_STATIONS, CITIES } from '../data/mockData';
+import { BAKU_METRO_STATIONS, CITIES, COURSE_IT_IMAGE, COURSE_LANG_IMAGE, COURSE_BUSINESS_IMAGE, HERO_IMAGE } from '../data/mockData';
 
 interface AdSubmissionModalProps {
   isOpen: boolean;
@@ -127,7 +127,13 @@ export const AdSubmissionModal: React.FC<AdSubmissionModalProps> = ({
       schedule,
       certificateProvided,
       level: 'Bütün səviyyələr',
-      image: '/src/assets/images/course_it_coding_1792232038730.jpg',
+      image: categorySlug.includes('it')
+        ? COURSE_IT_IMAGE
+        : categorySlug.includes('dil')
+        ? COURSE_LANG_IMAGE
+        : categorySlug.includes('biznes') || categorySlug.includes('komp')
+        ? COURSE_BUSINESS_IMAGE
+        : HERO_IMAGE,
       viewsCount: 1,
       createdAt: new Date().toISOString().split('T')[0],
       instructorName: instructorName.trim() || undefined,
